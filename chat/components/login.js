@@ -8,51 +8,91 @@ import {
 import { Accounts } from 'react-native-meteor';
 import Button from 'react-native-button';
 
+//import { Accounts } from 'meteor/accounts-base'
+
 export class Login extends Component {
 
-  test(a,b) {
-    console.log(a,b);
+  constructor() {
+    super();
+    this.state = {
+      username: '',
+      email: '',
+      password: ''
+    }
   }
 
-  _handlePress(event) {
-    console.log('Pressed!');
+  logIn() {
+    console.log('log in');
+    console.log(this.state);
+    Accounts.createUser(Object.assign({}, this.state), (error, a) => {
+      console.log(error, a);
+    });
+
   }
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
-        ref='1'
-        placeholder='Login'
-        blurOnSubmit={true}
-        onSubmitEditing={() => this.test('2')}
-        style={styles.input}
-      />
-      <TextInput
-        password={true}
-        style={styles.input}
-      />
+          placeholder='Email'
+          style={styles.input}
+          onChangeText={(email) => this.setState({email})}
+          value={this.state.email}
+        />
+        <TextInput
+          placeholder='Username'
+          style={styles.input}
+          onChangeText={(username) => this.setState({username})}
+          value={this.state.username}
+        />
+
+        <TextInput
+          placeholder='Password'
+          password={true}
+          style={styles.input}
+          onChangeText={(password) => this.setState({password})}
+          value={this.state.password}
+        />
+
         <Button
-          style={{fontSize: 20, color: 'green'}}
-          styleDisabled={{color: 'red'}}
-          onPress={this._handlePress}
+          style={styles.button}
+          containerStyle={styles.buttonContainer}
+          onPress={this.logIn.bind(this)}
         >
           Press Me!
         </Button>
-    </View>
-  );
+      </View>
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  input : {
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    margin: 20
+  },
+  input: {
     textAlign: 'center',
-    width: 100,
     height: 40,
     borderColor: 'gray',
-    borderWidth: 1
+    borderWidth: 1,
+    margin: 10
   },
   button: {
-
+    fontSize: 20,
+    color: 'white',
+    borderWidth: 1,
+    borderColor: 'gray',
+    backgroundColor: 'blue',
+    height: 40,
+    borderRadius: 5
+  },
+  buttonContainer: {
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: 'white'
   }
 });
