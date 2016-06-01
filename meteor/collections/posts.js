@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { SimpleSchema } from 'meteor/aldeed:collection2';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 const PostSchema = new SimpleSchema({
   message: {
@@ -9,7 +9,7 @@ const PostSchema = new SimpleSchema({
   },
   author: {
     type: String,
-  }
+  },
   submitDate: {
     type: Date,
     autoValue: Date.now,
