@@ -6,11 +6,16 @@ import {
   TextInput
 } from 'react-native';
 import { Accounts } from 'react-native-meteor';
+import Button from 'react-native-button';
 
 export class Login extends Component {
 
   test(a,b) {
     console.log(a,b);
+  }
+
+  _handlePress(event) {
+    console.log('Pressed!');
   }
 
   render() {
@@ -27,6 +32,13 @@ export class Login extends Component {
         password={true}
         style={styles.input}
       />
+        <Button
+          style={{fontSize: 20, color: 'green'}}
+          styleDisabled={{color: 'red'}}
+          onPress={this._handlePress}
+        >
+          Press Me!
+        </Button>
     </View>
   );
   }
@@ -39,5 +51,8 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'gray',
     borderWidth: 1
+  },
+  button: {
+
   }
 });
