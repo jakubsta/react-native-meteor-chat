@@ -4,9 +4,11 @@ import {
   Text,
   View
 } from 'react-native';
-import Meteor, { createContainer } from 'react-native-meteor';
+import Meteor, { createContainer, Accounts } from 'react-native-meteor';
+import { Login } from './login';
 
-Meteor.connect('http://192.168.43.215:3000/websocket');
+
+Meteor.connect('http://192.168.43.58:3000/websocket');
 
 export class Chat extends Component {
   render() {
@@ -21,6 +23,7 @@ export class Chat extends Component {
         <Text style={styles.instructions}>
           Shake or press menu button for dev menu
         </Text>
+        <Login />
       </View>
     );
   }
@@ -37,10 +40,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
