@@ -16,7 +16,8 @@ export class Home extends Component {
           onPress={() => this.props.navigator.push({name: 'login'})}>
           Go to login
         </Button>
-        <Button>
+        <Button
+          onPress={() => this.props.navigator.push({name: 'signup'})}>
           Go to signup
         </Button>
         <Button>

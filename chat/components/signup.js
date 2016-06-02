@@ -8,19 +8,23 @@ import {
 import { Accounts } from 'react-native-meteor';
 import Button from 'react-native-button';
 
-export class Login extends Component {
+export class Signup extends Component {
 
   constructor() {
     super();
     this.state = {
+      username: '',
       email: '',
       password: ''
     }
   }
 
-  logIn() {
-    console.log('log in');
+  createAccount() {
     console.log(this.state);
+    Accounts.createUser(Object.assign({}, this.state), (error, a) => {
+      console.log(error, a);
+      this.props.navigator.push({name: 'login'});
+    });
   }
 
   render() {
@@ -33,6 +37,12 @@ export class Login extends Component {
           value={this.state.email}
         />
         <TextInput
+          placeholder='Username'
+          style={styles.input}
+          onChangeText={(username) => this.setState({username})}
+          value={this.state.username}
+        />
+        <TextInput
           placeholder='Password'
           password={true}
           style={styles.input}
@@ -41,9 +51,9 @@ export class Login extends Component {
         />
         <Button
           style={styles.button}
-          onPress={this.logIn.bind(this)}
+          onPress={this.createAccount.bind(this)}
         >
-          Login
+          Singup
         </Button>
       </View>
     );

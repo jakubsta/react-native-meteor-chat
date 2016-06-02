@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import Meteor, { createContainer, Accounts } from 'react-native-meteor';
 import { Login } from './login';
+import { Signup } from './signup';
 import { Home } from './home';
 
 
@@ -24,25 +25,14 @@ export class Chat extends Component {
   renderScene(route, navigator) {
     switch(route.name) {
       case 'home': 
-        return <Home navigator={navigator}/>;  
+        return <Home navigator={navigator} {...route.passProps}/>;
       case 'login':
-        return <Login/>;
+        return <Login navigator={navigator} {...route.passProps}/>;
       case 'signup':
-        return <View></View>;
+        return <Signup navigator={navigator} {...route.passProps}/>;
     }
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  }
 });
