@@ -3,15 +3,36 @@ import {
   StyleSheet,
   Text,
   View,
+  AsyncStorage
 } from 'react-native';
+import Meteor from 'react-native-meteor';
 import Button from 'react-native-button';
 
 
 export class Home extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Home</Text>
+
+  constructor() {
+    super();
+    this.state = {
+      logged: !!Meteor.user()
+    };
+  }
+
+  logout() {
+    Meteor.logout(() => {
+      this.setState({logged: false});
+    });
+  }
+
+  userActions() {
+    return this.state.logged ? (
+      <Button
+        style={styles.button}
+        onPress={() => this.logout()}>
+        Logout
+      </Button>
+    ) : (
+      <View>
         <Button
           style={styles.button}
           onPress={() => this.props.navigator.push({name: 'login'})}>
@@ -22,7 +43,16 @@ export class Home extends Component {
           onPress={() => this.props.navigator.push({name: 'signup'})}>
           Go to signup
         </Button>
-        <Button 
+      </View>
+    );
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>Home</Text>
+        {this.userActions()}
+        <Button
           style={styles.button}
           onPress={() => this.props.navigator.push({name: 'rooms'})}>
           Go to rooms 

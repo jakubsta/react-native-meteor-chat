@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput
+  TextInput,
+  AsyncStorage
 } from 'react-native';
 import Meteor, { Accounts } from 'react-native-meteor';
 import Button from 'react-native-button';
@@ -12,8 +13,13 @@ import ReactTimeout from 'react-timeout';
 class Login extends Component {
 
   componentWillMount() {
-    console.log('props');
     this.setState(this.props);
+  }
+
+  componentDidMount() {
+    if (this.props.email && this.props.password) {
+      this.logIn();
+    }
   }
 
   constructor() {
@@ -28,12 +34,11 @@ class Login extends Component {
   }
 
   logIn() {
-    console.log('log in');
     Meteor.loginWithPassword({email: this.state.email}, this.state.password, (error) => {
-      console.log(error);
       if (error) {
-        this.setState({status: 'error', message: error.reason});
+        return this.setState({status: 'error', message: error.reason});
       }
+      this.props.navigator.push({name: 'home'});
     });
   }
 
@@ -43,7 +48,6 @@ class Login extends Component {
 
   showMessage() {
     if (this.state.message) {
-      console.log(this.state.message);
       this.props.setTimeout(this.clearMessage.bind(this), 3000);
     }
     return !this.state.message ? null : (
@@ -59,6 +63,7 @@ class Login extends Component {
         {this.showMessage.apply(this)}
         <TextInput
           placeholder='Email'
+          keyboardType='email-address'
           style={styles.input}
           onChangeText={(email) => this.setState({email})}
           value={this.state.email}
