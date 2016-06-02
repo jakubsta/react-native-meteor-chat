@@ -23,7 +23,14 @@ export class Signup extends Component {
     console.log(this.state);
     Accounts.createUser(Object.assign({}, this.state), (error, a) => {
       console.log(error, a);
-      this.props.navigator.push({name: 'login'});
+      this.props.navigator.push({
+        name: 'login',
+        passProps: {
+          status: 'success',
+          message: 'Account created!',
+          ...this.state
+        }
+      });
     });
   }
 
