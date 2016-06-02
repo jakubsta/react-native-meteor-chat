@@ -22,7 +22,9 @@ export class Home extends Component {
           onPress={() => this.props.navigator.push({name: 'signup'})}>
           Go to signup
         </Button>
-        <Button style={styles.button}>
+        <Button 
+          style={styles.button}
+          onPress={() => this.props.navigator.push({name: 'rooms'})}>
           Go to rooms 
         </Button>
       </View>

@@ -13,7 +13,6 @@ const RoomSchema = new SimpleSchema({
   },
   creationDate: {
     type: Date,
-    autoValue: Date.now,
   },
 });
 
