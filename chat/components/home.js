@@ -10,17 +10,19 @@ import Button from 'react-native-button';
 export class Home extends Component {
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Home</Text>
         <Button
+          style={styles.button}
           onPress={() => this.props.navigator.push({name: 'login'})}>
           Go to login
         </Button>
         <Button
+          style={styles.button}
           onPress={() => this.props.navigator.push({name: 'signup'})}>
           Go to signup
         </Button>
-        <Button>
+        <Button style={styles.button}>
           Go to rooms 
         </Button>
       </View>
@@ -29,11 +31,22 @@ export class Home extends Component {
 }
 
 const styles = StyleSheet.create({
-  input : {
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    margin: 50
+  },
+  button: {
     textAlign: 'center',
-    width: 100,
+    fontSize: 20,
+    color: 'white',
+    borderWidth: 1,
+    borderColor: 'black',
+    backgroundColor: '#ddd',
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1
+    margin: 10,
+    padding: 10
   }
 });

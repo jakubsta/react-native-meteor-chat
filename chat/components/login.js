@@ -5,14 +5,15 @@ import {
   View,
   TextInput
 } from 'react-native';
-import { Accounts } from 'react-native-meteor';
+import Meteor, { Accounts } from 'react-native-meteor';
 import Button from 'react-native-button';
+import ReactTimeout from 'react-timeout';
 
-export class Login extends Component {
+class Login extends Component {
 
   componentWillMount() {
+    console.log('props');
     this.setState(this.props);
-    console.log(this.state, this.props);
   }
 
   constructor() {
@@ -21,16 +22,30 @@ export class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      message: 'test'
+      message: null,
+      status: null
     }
   }
 
   logIn() {
     console.log('log in');
-    console.log(this.state);
+    Meteor.loginWithPassword({email: this.state.email}, this.state.password, (error) => {
+      console.log(error);
+      if (error) {
+        this.setState({status: 'error', message: error.reason});
+      }
+    });
+  }
+
+  clearMessage() {
+    this.setState({status: null, message: null});
   }
 
   showMessage() {
+    if (this.state.message) {
+      console.log(this.state.message);
+      this.props.setTimeout(this.clearMessage.bind(this), 3000);
+    }
     return !this.state.message ? null : (
       <View style={styles.message}>
         <Text style={styles.messageText}>{this.state.message}</Text>
@@ -66,13 +81,16 @@ export class Login extends Component {
   }
 }
 
+export default ReactTimeout(Login);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'stretch',
     justifyContent: 'center',
-    margin: 20
+    margin: 20,
+    backgroundColor: 'white'
   },
   input: {
     textAlign: 'center',
@@ -88,7 +106,8 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     backgroundColor: 'blue',
     height: 40,
-    borderRadius: 5
+    borderRadius: 10
+
   },
   message: {
     backgroundColor: '#E0E0E0',

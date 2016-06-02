@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'stretch',
     justifyContent: 'center',
-    margin: 20
+    margin: 20,
+    backgroundColor: 'white'
   },
   input: {
     textAlign: 'center',

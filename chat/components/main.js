@@ -6,17 +6,17 @@ import {
   Navigator
 } from 'react-native';
 import Meteor, { createContainer, Accounts } from 'react-native-meteor';
-import { Login } from './login';
+import Login from './login';
 import { Signup } from './signup';
 import { Home } from './home';
 
 
-Meteor.connect('http://192.168.43.58:3000/websocket');
+Meteor.connect('http://192.168.1.68:3000/websocket');
 
 export class Chat extends Component {
   render() {
     return (
-      <Navigator 
+      <Navigator
         initialRoute={{name: 'home'}}
         renderScene={this.renderScene}/>
     );
@@ -24,7 +24,7 @@ export class Chat extends Component {
 
   renderScene(route, navigator) {
     switch(route.name) {
-      case 'home': 
+      case 'home':
         return <Home navigator={navigator} {...route.passProps}/>;
       case 'login':
         return <Login navigator={navigator} {...route.passProps}/>;
