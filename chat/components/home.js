@@ -6,8 +6,7 @@ import {
   AsyncStorage
 } from 'react-native';
 import Meteor from 'react-native-meteor';
-import Button from 'react-native-button';
-
+import Button from 'apsl-react-native-button';
 
 export class Home extends Component {
 
@@ -32,6 +31,7 @@ export class Home extends Component {
       </Text>
       <Button
         style={styles.button}
+        textStyle={styles.buttonText}
         onPress={() => this.logout()}>
         Logout
       </Button>
@@ -40,13 +40,15 @@ export class Home extends Component {
       <View>
         <Button
           style={styles.button}
+          textStyle={styles.buttonText}
           onPress={() => this.props.navigator.push({name: 'login'})}>
-          Go to login
+          Login
         </Button>
         <Button
           style={styles.button}
+          textStyle={styles.buttonText}
           onPress={() => this.props.navigator.push({name: 'signup'})}>
-          Go to signup
+          Signup
         </Button>
       </View>
     );
@@ -58,8 +60,9 @@ export class Home extends Component {
         {this.userActions()}
         <Button
           style={styles.button}
+          textStyle={styles.buttonText}
           onPress={() => this.props.navigator.push({name: 'rooms'})}>
-          Go to rooms 
+          Chat rooms
         </Button>
       </View>
   );
@@ -72,17 +75,18 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'stretch',
     justifyContent: 'center',
-    margin: 50
+    marginLeft: 20,
+    marginRight: 20,
   },
   button: {
-    textAlign: 'center',
-    fontSize: 20,
-    color: 'white',
     borderWidth: 1,
-    borderColor: 'black',
-    backgroundColor: '#ddd',
+    borderColor: '#2980b9',
+    backgroundColor: '#3498db',
     height: 40,
     margin: 10,
     padding: 10
+  },
+  buttonText: {
+    color: 'white'
   }
 });

@@ -7,7 +7,7 @@ import {
   AsyncStorage
 } from 'react-native';
 import Meteor, { Accounts } from 'react-native-meteor';
-import Button from 'react-native-button';
+import Button from 'apsl-react-native-button';
 import ReactTimeout from 'react-timeout';
 
 class Login extends Component {
@@ -77,6 +77,7 @@ class Login extends Component {
         />
         <Button
           style={styles.button}
+          textStyle={styles.buttonText}
           onPress={this.logIn.bind(this)}
         >
           Login
@@ -105,14 +106,15 @@ const styles = StyleSheet.create({
     margin: 10
   },
   button: {
-    fontSize: 20,
-    color: 'white',
     borderWidth: 1,
-    borderColor: 'gray',
-    backgroundColor: 'blue',
+    borderColor: '#2980b9',
+    backgroundColor: '#3498db',
     height: 40,
-    borderRadius: 10
-
+    margin: 10,
+    padding: 10
+  },
+  buttonText: {
+    color: 'white'
   },
   message: {
     backgroundColor: '#E0E0E0',

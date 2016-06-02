@@ -6,10 +6,10 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "apsl-react-native-button": "^2.5.0",
     "react": "15.0.2",
     "react-native": "^0.26.2",
     "react-native-action-button": "^1.1.5",
-    "react-native-button": "^1.6.0",
     "react-native-meteor": "^1.0.0-rc7",
     "react-timeout": "^1.0.0"
   }
