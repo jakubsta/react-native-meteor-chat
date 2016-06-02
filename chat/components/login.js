@@ -9,6 +9,7 @@ import {
 import Meteor, { Accounts } from 'react-native-meteor';
 import Button from 'apsl-react-native-button';
 import ReactTimeout from 'react-timeout';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 class Login extends Component {
 
@@ -82,6 +83,7 @@ class Login extends Component {
         >
           Login
         </Button>
+        <KeyboardSpacer/>
       </View>
     );
   }
