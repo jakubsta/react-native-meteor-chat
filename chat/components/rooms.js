@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  Icon,
   View,
+  Modal,
   TouchableOpacity,
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
@@ -13,6 +13,9 @@ export default class Rooms extends Component {
   constructor() {
     super();
     Meteor.subscribe('rooms');
+    this.state = {
+      modalVisible: false
+    };
   }
 
   render() {
@@ -24,14 +27,25 @@ export default class Rooms extends Component {
           renderRow={this.renderItem}
           renderHeader={this.renderHeader}
         />
+        <Modal
+          transparent={true}
+          visible={this.state.modalVisible}
+        >
+          <View style={styles.container}>
+            <View style={styles.innerContainer}>
+              <Text>Hello</Text>
+            </View>
+          </View>
+        </Modal>
         <ActionButton 
           buttonColor="rgba(231,76,60,1)"
-          onPress={this.onFABPress}/>
+          onPress={this.onFABPress.bind(this)}/>
       </View>);
   }
   
   onFABPress() {
-    Meteor.call('addRoom', 'new fab', 'new room created using fab');
+    this.setState({modalVisible: !this.state.modalVisible})
+    // Meteor.call('addRoom', 'new fab', 'new room created using fab');
   }
 
   renderHeader() {
@@ -57,17 +71,26 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   roomTitle: {
-    // textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 25,
   },
   row: {
-    // flexDirection: 'row',
-    // justifyContent: 'center',
     padding: 10,
     backgroundColor: '#F6F6F6',
   },
   button: {
     backgroundColor: 'green'
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  innerContainer: {
+    backgroundColor: '#fff', 
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
   }
 });
