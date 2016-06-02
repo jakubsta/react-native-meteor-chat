@@ -20,7 +20,7 @@ export default class Rooms extends Component {
 
   render() {
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1, backgroundColor: 'white'}}>
         <MeteorListView
           collection='rooms'
           enableEmptySections={true}
