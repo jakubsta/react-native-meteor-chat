@@ -7,11 +7,11 @@ import {
 } from 'react-native';
 import Meteor, { Accounts } from 'react-native-meteor';
 import Login from './login';
-import { Signup } from './signup';
+import Signup from './signup';
 import { Home } from './home';
 import Rooms from './rooms';
 
-Meteor.connect('ws://192.168.15.50:3000/websocket');
+Meteor.connect('http://192.168.1.68:3000/websocket');
 
 export class Chat extends Component {
   render() {

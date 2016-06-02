@@ -26,11 +26,16 @@ export class Home extends Component {
 
   userActions() {
     return this.state.logged ? (
+    <View>
+      <Text style={{fontWeight: 'bold'}}>
+        Welcome {Meteor.user().username}
+      </Text>
       <Button
         style={styles.button}
         onPress={() => this.logout()}>
         Logout
       </Button>
+      </View>
     ) : (
       <View>
         <Button
@@ -50,7 +55,6 @@ export class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Home</Text>
         {this.userActions()}
         <Button
           style={styles.button}
