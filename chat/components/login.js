@@ -4,7 +4,6 @@ import {
   Text,
   View,
   TextInput,
-  AsyncStorage
 } from 'react-native';
 import Meteor, { Accounts } from 'react-native-meteor';
 import Button from 'apsl-react-native-button';
@@ -12,7 +11,6 @@ import ReactTimeout from 'react-timeout';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 class Login extends Component {
-
   componentWillMount() {
     this.setState(this.props);
   }
@@ -22,7 +20,6 @@ class Login extends Component {
       this.logIn();
     }
   }
-
   constructor() {
     super();
 

@@ -5,9 +5,13 @@ import {
   View,
   Modal,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Meteor, { createContainer, MeteorListView } from 'react-native-meteor';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+
+import { AddRoomModal } from './addRoomModal';
 
 export default class Rooms extends Component {
   constructor() {
@@ -31,11 +35,12 @@ export default class Rooms extends Component {
           transparent={true}
           visible={this.state.modalVisible}
         >
-          <View style={styles.container}>
-            <View style={styles.innerContainer}>
-              <Text>Hello</Text>
+          <TouchableWithoutFeedback onPress={() => this.setState({modalVisible: false})}>
+            <View style={styles.container}>
+              <AddRoomModal onClose={this.onAddRoom.bind(this)}/>
+              <KeyboardSpacer/>
             </View>
-          </View>
+          </TouchableWithoutFeedback>
         </Modal>
         <ActionButton 
           buttonColor="rgba(231,76,60,1)"
@@ -43,9 +48,12 @@ export default class Rooms extends Component {
       </View>);
   }
   
+  onAddRoom({title, description}) {
+    Meteor.call('addRoom',  title, description);
+    this.setState({modalVisible: false});
+  }
   onFABPress() {
-    this.setState({modalVisible: !this.state.modalVisible})
-    // Meteor.call('addRoom', 'new fab', 'new room created using fab');
+    this.setState({modalVisible: true})
   }
 
   renderHeader() {
@@ -87,10 +95,4 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-  innerContainer: {
-    backgroundColor: '#fff', 
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-  }
 });

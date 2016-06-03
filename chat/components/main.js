@@ -11,7 +11,7 @@ import Signup from './signup';
 import { Home } from './home';
 import Rooms from './rooms';
 
-Meteor.connect('http://192.168.1.68:3000/websocket');
+Meteor.connect('ws://10.251.241.153:3000/websocket');
 
 export class Chat extends Component {
   render() {
