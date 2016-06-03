@@ -10,6 +10,8 @@ import Meteor, { MeteorListView } from 'react-native-meteor';
 import Button from 'apsl-react-native-button';
 import moment from 'momentjs';
 
+import PostAdder from './postAdder';
+
 export default class Posts extends Component {
   componentWillMount() {
     Meteor.subscribe('posts', this.props.room._id);
@@ -17,15 +19,18 @@ export default class Posts extends Component {
 
   render() {
     return (
-      <View>
-        <Text>{this.props.room.title}</Text>
-        <Text>{this.props.room.description}</Text>
+      <View style={{flex:1}}>
+        <View style={{flex:.85}}>
+          <Text>{this.props.room.title}</Text>
+          <Text>{this.props.room.description}</Text>
           <MeteorListView
             collection='posts'
             enableEmptySections={true}
             renderRow={this.renderItem.bind(this)}
             selector={{roomId: this.props.room._id}}
           />
+        </View>
+        <PostAdder roomId={this.props.room._id}/>
       </View>);
   }
 
