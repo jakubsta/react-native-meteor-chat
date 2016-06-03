@@ -22,7 +22,7 @@ class Chat extends Component {
 
     return (
       <Navigator
-        initialRoute={{name: 'home', passProps: {user: this.props.user}}}
+        initialRoute={{name: 'home'}}
         configureScene={this.configureScene}
         renderScene={this.renderScene}/>
     );
@@ -50,8 +50,7 @@ class Chat extends Component {
 
 export default createContainer(() => {
   return {
-    connected: Meteor.status().connected,
-    user: Meteor.user()
+    connected: Meteor.status().connected
   };
 }, Chat);
 

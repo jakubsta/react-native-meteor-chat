@@ -5,10 +5,10 @@ import {
   View,
   AsyncStorage
 } from 'react-native';
-import Meteor from 'react-native-meteor';
+import Meteor, { createContainer } from 'react-native-meteor';
 import Button from 'apsl-react-native-button';
 
-export default class Home extends Component {
+class Home extends Component {
   constructor() {
     super();
   }
@@ -63,6 +63,13 @@ export default class Home extends Component {
       </View>);
   }
 }
+
+export default createContainer((props) => {
+  return {
+    user: Meteor.user(),
+    ...props
+  }
+}, Home);
 
 const styles = StyleSheet.create({
   container: {
