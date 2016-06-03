@@ -8,7 +8,7 @@ import {
 import Meteor, { Accounts } from 'react-native-meteor';
 import Login from './login';
 import Signup from './signup';
-import { Home } from './home';
+import Home from './home';
 import Rooms from './rooms';
 import Posts from './posts';
 

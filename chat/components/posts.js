@@ -13,16 +13,31 @@ import moment from 'momentjs';
 import PostAdder from './postAdder';
 
 export default class Posts extends Component {
+
+  constructor() {
+    super();
+
+    this.postColors = [
+      '#91D100',
+      '#1FAEFF',
+      '#F3B200',
+      '#FF76BC',
+      '#FF1D77'
+    ];
+    this.authorColor = new Map();
+  }
+
   componentWillMount() {
     Meteor.subscribe('posts', this.props.room._id);
   }
 
   render() {
     return (
-      <View style={{flex:1}}>
+      <View style={styles.container}>
         <View style={{flex:.85}}>
-          <Text>{this.props.room.title}</Text>
-          <Text>{this.props.room.description}</Text>
+        <Text style={styles.roomTitle}>{this.props.room.title}</Text>
+        <Text style={styles.roomDescription}>{this.props.room.description}</Text>
+        <View style={styles.chatContainer}>
           <MeteorListView
             collection='posts'
             enableEmptySections={true}
@@ -30,18 +45,61 @@ export default class Posts extends Component {
             selector={{roomId: this.props.room._id}}
           />
         </View>
+        </View>
         <PostAdder roomId={this.props.room._id}/>
       </View>);
   }
 
+  getPostBackground(author) {
+    let authorColor = this.authorColor.get(author);
+    if (!authorColor) {
+      authorColor = this.postColors.pop();
+      this.authorColor.set(author, authorColor);
+    }
+    return { backgroundColor: authorColor };
+  }
+
   renderItem(post) {
     const dateTime = moment(post.submitDate).format('hh:mm DD.MM.YYYY');
+    //<Text style={styles.date}>{dateTime}</Text>
     return (
-      <View>
-        <Text>{post.message}</Text>
-        <Text>{post.author}</Text>
-        <Text>{dateTime}</Text>
+      <View style={[styles.postContainer, this.getPostBackground(post.author)]}>
+          <Text style={styles.author}>{post.author}</Text>
+          <Text style={styles.message}>{post.message}</Text>
       </View>
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    marginTop: 20,
+  },
+  chatContainer: {
+    flex: 1,
+    margin: 10
+  },
+  postContainer: {
+    backgroundColor: '#f0f0f0',
+    borderRadius: 10
+  },
+  author: {
+    fontSize: 10
+  },
+  message: {
+    fontSize: 20
+  },
+  roomTitle: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 25,
+    backgroundColor: '#E0E0E0',
+  },
+  roomDescription: {
+    backgroundColor: '#E0E0E0',
+    padding: 10,
+  }
+});

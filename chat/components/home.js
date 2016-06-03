@@ -8,7 +8,7 @@ import {
 import Meteor from 'react-native-meteor';
 import Button from 'apsl-react-native-button';
 
-export class Home extends Component {
+export default class Home extends Component {
 
   constructor() {
     super();

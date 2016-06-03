@@ -84,7 +84,8 @@ export default class Rooms extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    marginTop: 20
   },
   header: {
     textAlign: 'center',
