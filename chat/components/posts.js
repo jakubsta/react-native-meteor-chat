@@ -56,7 +56,7 @@ export default class Posts extends Component {
       authorColor = this.postColors.pop();
       this.authorColor.set(author, authorColor);
     }
-    return { backgroundColor: authorColor };
+    return { backgroundColor: authorColor, borderColor: authorColor };
   }
 
   renderItem(post) {
@@ -83,14 +83,22 @@ const styles = StyleSheet.create({
     margin: 10
   },
   postContainer: {
+    margin: 2,
+    marginBottom: 5,
+    padding: 5,
     backgroundColor: '#f0f0f0',
-    borderRadius: 10
+    borderColor: '#f0f0f0',
+    borderRadius: 20,
+    borderWidth: 1,
+    height: 50,
+    borderRadius: 7,
   },
   author: {
-    fontSize: 10
+    fontSize: 10,
   },
   message: {
-    fontSize: 20
+    fontSize: 16,
+    paddingLeft: 5
   },
   roomTitle: {
     textAlign: 'center',
