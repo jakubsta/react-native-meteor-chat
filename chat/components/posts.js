@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Meteor, { MeteorListView } from 'react-native-meteor';
 import Button from 'apsl-react-native-button';
+import moment from 'momentjs';
 
 export default class Posts extends Component {
   componentWillMount() {
@@ -21,19 +22,20 @@ export default class Posts extends Component {
         <Text>{this.props.room.description}</Text>
           <MeteorListView
             collection='posts'
-            selector={{roomId: this.props.room._id}}
             enableEmptySections={true}
             renderRow={this.renderItem.bind(this)}
+            selector={{roomId: this.props.room._id}}
           />
       </View>);
   }
 
   renderItem(post) {
-        // <Text>{post.submitDate}</Text>
+    const dateTime = moment(post.submitDate).format('hh:mm DD.MM.YYYY');
     return (
       <View>
         <Text>{post.message}</Text>
         <Text>{post.author}</Text>
+        <Text>{dateTime}</Text>
       </View>
     );
   }
