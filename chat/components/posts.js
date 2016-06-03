@@ -4,9 +4,9 @@ import {
   Text,
   View,
   TextInput,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import Meteor, { MeteorListView } from 'react-native-meteor';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Button from 'apsl-react-native-button';
 import moment from 'momentjs';
 
@@ -47,6 +47,7 @@ export default class Posts extends Component {
         </View>
         </View>
         <PostAdder roomId={this.props.room._id}/>
+        <KeyboardSpacer/>
       </View>);
   }
 
