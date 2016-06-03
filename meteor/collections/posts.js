@@ -12,8 +12,10 @@ const PostSchema = new SimpleSchema({
   },
   submitDate: {
     type: Date,
-    autoValue: Date.now,
   },
+  roomId: {
+    type: String,
+  }
 });
 
 const Posts = new Mongo.Collection('posts');

@@ -28,7 +28,7 @@ export default class Rooms extends Component {
         <MeteorListView
           collection='rooms'
           enableEmptySections={true}
-          renderRow={this.renderItem}
+          renderRow={this.renderItem.bind(this)}
           renderHeader={this.renderHeader}
         />
         <Modal
@@ -60,15 +60,24 @@ export default class Rooms extends Component {
     return <Text style={styles.header}>Rooms</Text>;
   }
 
-  renderItem(item) {
+  renderItem(room) {
     return (
-      <TouchableOpacity onPress={this._onPressButton}>
+      <TouchableOpacity onPress={this.selectRoom.bind(this, room)}>
         <View style={styles.row}>
-          <Text style={styles.roomTitle}>{item.title}</Text>
-          <Text>{item.description}</Text>
+          <Text style={styles.roomTitle}>{room.title}</Text>
+          <Text>{room.description}</Text>
         </View>
       </TouchableOpacity>
     ); 
+  }
+  
+  selectRoom(room) {
+    this.props.navigator.push({
+      name: 'posts',
+      passProps: {
+        room: room
+      }
+    });
   }
 }
 
