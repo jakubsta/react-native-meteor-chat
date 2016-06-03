@@ -9,6 +9,7 @@ import Meteor, { MeteorListView } from 'react-native-meteor';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Button from 'apsl-react-native-button';
 import moment from 'momentjs';
+import chroma from 'chroma-js';
 
 import PostAdder from './postAdder';
 
@@ -16,14 +17,6 @@ export default class Posts extends Component {
 
   constructor() {
     super();
-
-    this.postColors = [
-      '#91D100',
-      '#1FAEFF',
-      '#F3B200',
-      '#FF76BC',
-      '#FF1D77'
-    ];
     this.authorColor = new Map();
   }
 
@@ -54,7 +47,7 @@ export default class Posts extends Component {
   getPostBackground(author) {
     let authorColor = this.authorColor.get(author);
     if (!authorColor) {
-      authorColor = this.postColors.pop();
+      authorColor = chroma.random().brighten().hex();
       this.authorColor.set(author, authorColor);
     }
     return { backgroundColor: authorColor, borderColor: authorColor };
@@ -62,7 +55,6 @@ export default class Posts extends Component {
 
   renderItem(post) {
     const dateTime = moment(post.submitDate).format('hh:mm DD.MM.YYYY');
-    //<Text style={styles.date}>{dateTime}</Text>
     return (
       <View style={[styles.postContainer, this.getPostBackground(post.author)]}>
           <Text style={styles.author}>{post.author}</Text>

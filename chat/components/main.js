@@ -5,14 +5,12 @@ import {
   View,
   Navigator
 } from 'react-native';
-import Meteor, { Accounts } from 'react-native-meteor';
+import './connect';
 import Login from './login';
 import Signup from './signup';
 import Home from './home';
 import Rooms from './rooms';
 import Posts from './posts';
-
-Meteor.connect('ws://10.251.241.153:3000/websocket');
 
 export class Chat extends Component {
   render() {
