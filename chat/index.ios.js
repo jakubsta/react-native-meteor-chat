@@ -5,6 +5,6 @@
  */
 
 import { AppRegistry } from 'react-native';
-import { Chat } from './components/main';
+import Chat from './components/main';
 
 AppRegistry.registerComponent('chat', () => Chat);

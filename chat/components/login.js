@@ -36,7 +36,7 @@ class Login extends Component {
       if (error) {
         return this.setState({status: 'error', message: error.reason});
       }
-      this.props.navigator.push({name: 'home'});
+      this.props.navigator.push({name: 'home', passProps: {user: Meteor.user()}});
     });
   }
 

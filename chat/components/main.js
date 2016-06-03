@@ -5,6 +5,8 @@ import {
   View,
   Navigator
 } from 'react-native';
+import Meteor, { createContainer } from 'react-native-meteor';
+
 import './connect';
 import Login from './login';
 import Signup from './signup';
@@ -12,11 +14,15 @@ import Home from './home';
 import Rooms from './rooms';
 import Posts from './posts';
 
-export class Chat extends Component {
+class Chat extends Component {
   render() {
+    if(!this.props.connected) {
+      return (<Text>Connecting to the server</Text>);
+    } 
+
     return (
       <Navigator
-        initialRoute={{name: 'home'}}
+        initialRoute={{name: 'home', passProps: {user: this.props.user}}}
         configureScene={this.configureScene}
         renderScene={this.renderScene}/>
     );
@@ -41,6 +47,13 @@ export class Chat extends Component {
      return Navigator.SceneConfigs.PushFromRight 
   }
 }
+
+export default createContainer(() => {
+  return {
+    connected: Meteor.status().connected,
+    user: Meteor.user()
+  };
+}, Chat);
 
 const styles = StyleSheet.create({
 });

@@ -9,63 +9,58 @@ import Meteor from 'react-native-meteor';
 import Button from 'apsl-react-native-button';
 
 export default class Home extends Component {
-
   constructor() {
     super();
-    this.state = {
-      logged: !!Meteor.user()
-    };
-  }
-
-  logout() {
-    Meteor.logout(() => {
-      this.setState({logged: false});
-    });
-  }
-
-  userActions() {
-    return this.state.logged ? (
-    <View>
-      <Text style={{fontWeight: 'bold'}}>
-        Welcome {Meteor.user().username}
-      </Text>
-      <Button
-        style={styles.button}
-        textStyle={styles.buttonText}
-        onPress={() => this.logout()}>
-        Logout
-      </Button>
-      </View>
-    ) : (
-      <View>
-        <Button
-          style={styles.button}
-          textStyle={styles.buttonText}
-          onPress={() => this.props.navigator.push({name: 'login'})}>
-          Login
-        </Button>
-        <Button
-          style={styles.button}
-          textStyle={styles.buttonText}
-          onPress={() => this.props.navigator.push({name: 'signup'})}>
-          Signup
-        </Button>
-      </View>
-    );
   }
 
   render() {
     return (
       <View style={styles.container}>
         {this.userActions()}
+      </View>);
+  }
+
+  logout() {
+    Meteor.logout();
+  }
+
+  userActions() {
+    if(!this.props.user) {
+      return (
+        <View>
+          <Button
+            style={styles.button}
+            textStyle={styles.buttonText}
+            onPress={() => this.props.navigator.push({name: 'login'})}>
+            Login
+          </Button>
+          <Button
+            style={styles.button}
+            textStyle={styles.buttonText}
+            onPress={() => this.props.navigator.push({name: 'signup'})}>
+            Signup
+          </Button>
+        </View>); 
+    }
+
+    return (
+      <View>
+        <Text style={{fontWeight: 'bold'}}>
+          Welcome {this.props.user.username}
+        </Text>
+        <Button
+          style={styles.button}
+          textStyle={styles.buttonText}
+          onPress={() => this.logout()}>
+          Logout
+        </Button>
         <Button
           style={styles.button}
           textStyle={styles.buttonText}
           onPress={() => this.props.navigator.push({name: 'rooms'})}>
           Chat rooms
         </Button>
-      </View>
-  );
+      </View>);
   }
 }
 

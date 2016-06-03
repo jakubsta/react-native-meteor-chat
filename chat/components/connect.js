@@ -1,3 +1,3 @@
 import Meteor from 'react-native-meteor';
 
-Meteor.connect('ws://localhost:3000/websocket');
+Meteor.connect('ws://10.251.241.153:3000/websocket');
