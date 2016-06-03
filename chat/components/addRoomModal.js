@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
-    margin: 10
+    margin: 10,
+    borderRadius: 7
   },
   button: {
     borderWidth: 1,
@@ -72,5 +73,8 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 10,
     padding: 10
+  },
+  buttonText: {
+    color: 'white'
   },
 }); 

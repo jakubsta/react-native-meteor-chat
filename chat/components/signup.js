@@ -114,7 +114,8 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
-    margin: 10
+    margin: 10,
+    borderRadius: 7
   },
   button: {
     borderWidth: 1,
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     height: 60,
     padding: 5,
     margin: 10,
-    borderRadius: 10
+    borderRadius: 7
   },
   messageText: {
     textAlign: 'center',

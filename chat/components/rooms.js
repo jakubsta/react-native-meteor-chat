@@ -24,7 +24,7 @@ export default class Rooms extends Component {
 
   render() {
     return (
-      <View style={{flex:1, backgroundColor: 'white'}}>
+      <View style={styles.container}>
         <MeteorListView
           collection='rooms'
           enableEmptySections={true}
@@ -36,18 +36,18 @@ export default class Rooms extends Component {
           visible={this.state.modalVisible}
         >
           <TouchableWithoutFeedback onPress={() => this.setState({modalVisible: false})}>
-            <View style={styles.container}>
+            <View style={styles.containerBackground}>
               <AddRoomModal onClose={this.onAddRoom.bind(this)}/>
               <KeyboardSpacer/>
             </View>
           </TouchableWithoutFeedback>
         </Modal>
-        <ActionButton 
+        <ActionButton
           buttonColor="rgba(231,76,60,1)"
           onPress={this.onFABPress.bind(this)}/>
       </View>);
   }
-  
+
   onAddRoom({title, description}) {
     Meteor.call('addRoom',  title, description);
     this.setState({modalVisible: false});
@@ -68,7 +68,7 @@ export default class Rooms extends Component {
           <Text>{room.description}</Text>
         </View>
       </TouchableOpacity>
-    ); 
+    );
   }
   
   selectRoom(room) {
@@ -82,6 +82,10 @@ export default class Rooms extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
   header: {
     textAlign: 'center',
     fontWeight: 'bold',
@@ -98,7 +102,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: 'green'
   },
-  container: {
+  containerBackground: {
     flex: 1,
     justifyContent: 'center',
     padding: 20,

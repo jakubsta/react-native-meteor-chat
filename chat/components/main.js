@@ -12,7 +12,7 @@ import { Home } from './home';
 import Rooms from './rooms';
 import Posts from './posts';
 
-Meteor.connect('ws://10.251.241.153:3000/websocket');
+Meteor.connect('ws://10.251.241.184:3000/websocket');
 
 export class Chat extends Component {
   render() {
