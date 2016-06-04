@@ -28,16 +28,17 @@ export default class Posts extends Component {
     return (
       <View style={styles.container}>
         <View style={{flex:.85}}>
-        <Text style={styles.roomTitle}>{this.props.room.title}</Text>
-        <Text style={styles.roomDescription}>{this.props.room.description}</Text>
-        <View style={styles.chatContainer}>
-          <MeteorListView
-            collection='posts'
-            enableEmptySections={true}
-            renderRow={this.renderItem.bind(this)}
-            selector={{roomId: this.props.room._id}}
-          />
-        </View>
+          <Text style={styles.roomTitle}>{this.props.room.title}</Text>
+          <Text style={styles.roomDescription}>{this.props.room.description}</Text>
+          <View style={styles.chatContainer}>
+            <MeteorListView
+              collection='posts'
+              enableEmptySections={true}
+              renderRow={this.renderItem.bind(this)}
+              selector={{roomId: this.props.room._id}}
+              ref='postList'
+            />
+          </View>
         </View>
         <PostAdder roomId={this.props.room._id}/>
         <KeyboardSpacer/>
@@ -54,11 +55,14 @@ export default class Posts extends Component {
   }
 
   renderItem(post) {
-    const dateTime = moment(post.submitDate).format('hh:mm DD.MM.YYYY');
+    const dateTime = moment(post.submitDate).format('hh:mm:ss DD.MM.YYYY');
     return (
       <View style={[styles.postContainer, this.getPostBackground(post.author)]}>
+        <View style={styles.postHeader}>
           <Text style={styles.author}>{post.author}</Text>
-          <Text style={styles.message}>{post.message}</Text>
+          <Text style={styles.date}>{dateTime}</Text>
+        </View>
+        <Text style={styles.message}>{post.message}</Text>
       </View>
     );
   }
@@ -78,16 +82,23 @@ const styles = StyleSheet.create({
   postContainer: {
     margin: 2,
     marginBottom: 5,
-    padding: 5,
-    backgroundColor: '#f0f0f0',
-    borderColor: '#f0f0f0',
+    padding: 10,
     borderRadius: 20,
     borderWidth: 1,
-    height: 50,
-    borderRadius: 7,
+    flex: 1,
+  },
+  postHeader: {
+    flex: 1,
+    flexDirection: 'row',
   },
   author: {
     fontSize: 10,
+    flex: .5,
+  },
+  date: {
+    fontSize: 10,
+    textAlign: 'right',
+    flex: .5,
   },
   message: {
     fontSize: 16,

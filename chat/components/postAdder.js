@@ -49,16 +49,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   icon: {
-    width: 50,
+    flex: .1,
     margin: 10,
+    width: 35,
     resizeMode: 'contain',
   },
   input: {
     flex: .9,
-    textAlign: 'center',
     borderColor: 'gray',
     borderWidth: 1,
+    borderRadius: 7,
     margin: 10,
-    borderRadius: 10,
+    padding: 5
   }
 });

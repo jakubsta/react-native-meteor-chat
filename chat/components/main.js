@@ -17,7 +17,7 @@ import Posts from './posts';
 class Chat extends Component {
   render() {
     if(!this.props.connected) {
-      return (<Text>Connecting to the server</Text>);
+      return (<Text style={{margin: 20}}>Connecting to meteor server ...</Text>);
     } 
 
     return (
